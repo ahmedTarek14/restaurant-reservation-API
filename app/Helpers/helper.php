@@ -40,7 +40,7 @@ if (!function_exists('api_response_success')) {
     {
         return response()->json([
             'status' => true,
-            'message' => $data,
+            'data' => $data,
         ], 200);
     }
 }

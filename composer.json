@@ -28,7 +28,8 @@
         },
         "files": [
             "app/Helpers/helper.php",
-            "app/Helpers/Routes/RouteHelper.php"
+            "app/Helpers/Routes/RouteHelper.php",
+            "app/Helpers/PaginationHelper.php"
         ]
     },
     "autoload-dev": {
