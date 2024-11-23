@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Table extends Model
+class WaitingList extends Model
 {
     use HasFactory;
 
+    protected $table = 'waiting_list';
+
     protected $fillable = [
-        'capacity',
+        'customer_id',
+        'added_at',
     ];
 
-    public function reservations()
+    public function customer()
     {
-        return $this->hasMany(Reservation::class);
+        return $this->belongsTo(Customer::class);
     }
 }
