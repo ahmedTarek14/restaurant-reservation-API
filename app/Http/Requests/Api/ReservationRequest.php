@@ -40,8 +40,8 @@ class ReservationRequest extends FormRequest
     {
         return [
             'customer_id' => 'required|exists:customers,id',
-            'from_time' => 'required|date',
-            'to_time' => 'required|date|after:from_time',
+            'from_time' => 'required|date|after_or_equal:' . now()->startOfDay(),
+            'to_time' => 'required|date|after:from_time|after_or_equal:' . now(),
             'number_of_guests' => 'required|integer|min:1',
 
         ];

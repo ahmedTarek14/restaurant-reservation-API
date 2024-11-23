@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Api;
 
+
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ReservationAvailabilityRequest extends FormRequest
+class OrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -39,20 +40,30 @@ class ReservationAvailabilityRequest extends FormRequest
     public function rules()
     {
         return [
-            'from_time' => 'required|date|after_or_equal:' . now()->startOfDay(),
-            'to_time' => 'required|date|after:from_time|after_or_equal:' . now(),
-            'number_of_guests' => 'required|integer|min:1',
-
+            'customer_id' => 'required|exists:customers,id',
+            'reservation_id' => 'required|exists:reservations,id',
+            'meals' => 'required|array',
+            'meals.*.meal_id' => 'required|exists:meals,id|distinct',
+            'meals.*.quantity' => 'required|integer|min:1',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'reservation_id.required' => 'Reservation ID is required.',
+            'meals.required' => 'You must provide at least one meal.',
+            'meals.*.meal_id.exists' => 'The selected meal does not exist.',
+            'meals.*.quantity.min' => 'The quantity must be at least 1.',
         ];
     }
 
     public function attributes()
     {
         return [
-            'from_time' => 'From Time',
-            'to_time' => 'To Time',
-            'number_of_guests' => 'Number Of Guests',
-
+            'customer_id' => 'Customer ID',
+            'reservation_id' => 'Reservation ID',
+            'meals.*.meal_id' => 'Meal ID',
+            'meals.*.quantity' => 'Meal Quantity',
         ];
     }
 }

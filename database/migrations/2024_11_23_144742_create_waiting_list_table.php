@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('waiting_list', function (Blueprint $table) {
             $table->id();
+            $table->integer('number_of_guests');
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->timestamp('added_at');
             $table->timestamps();

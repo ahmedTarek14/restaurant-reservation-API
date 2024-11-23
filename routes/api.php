@@ -17,10 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::name('reservation.')
-    ->prefix('reservation')
-    ->controller(ReservationController::class)
-    ->group(function () {
-        Route::post('/check-availability', 'checkAvailability')->name('check');
-        Route::post('/reserve-table', 'reserveTable')->name('reserve');
-    });
+Route::name('reservation.')->prefix('reservation')->controller(ReservationController::class)->group(function () {
+    Route::post('/check-availability', 'checkAvailability')->name('check');
+    Route::post('/reserve-table', 'reserveTable')->name('reserve');
+});
+
+Route::name('order.')->prefix('order')->controller(OrderController::class)->group(function () {
+    Route::post('/place-order', 'placeOrder')->name('placeOrder');
+    Route::post('/checkout', 'checkout')->name('checkout');
+});
+
+Route::get('meals/menu', [MealController::class, 'listMenu'])->name('meals.all');
