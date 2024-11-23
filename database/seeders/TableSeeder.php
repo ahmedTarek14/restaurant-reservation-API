@@ -16,9 +16,6 @@ class TableSeeder extends Seeder
         Table::insert([
             ['capacity' => 2],
             ['capacity' => 4],
-            ['capacity' => 6],
-            ['capacity' => 8],
-            ['capacity' => 10],
         ]);
     }
 }

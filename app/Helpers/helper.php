@@ -1,5 +1,4 @@
 <?php
-use Modules\Vote\Entities\Vote;
 
 if (!function_exists('failed_validation')) {
     function failed_validation($error)
@@ -41,7 +40,7 @@ if (!function_exists('api_response_success')) {
     {
         return response()->json([
             'status' => true,
-            'data' => $data,
+            'message' => $data,
         ], 200);
     }
 }
